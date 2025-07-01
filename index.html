@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        .recent-button {
+            background-color: #1f2937;
+            color: #93c5fd;
+            padding: 8px 12px;
+            margin: 5px 5px 0 0;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .recent-button:hover {
+            background-color: #2563eb;
+            color: #fff;
+        }
+
+        #welcome-screen {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+
+        #welcome-screen h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        #welcome-screen p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #dcdcdc;
+        }
+
+        .search {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 60%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 16px;
+            font-size: 16px;
+            margin-left: 8px;
+            border: none;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1e40af;
+        }
+
+        .loading {
+            margin-top: 10px;
+            color: #2563eb;
+        }
+
+        .weather-info {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        #map {
+            margin-top: 20px;
+            height: 400px;
+            display: none;
+        }
+
+        /* Recent searches container */
+        .recent-searches {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recent-searches h3 {
+            color: #93c5fd;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Welcome Screen with Active Search -->
+    <div id="welcome-screen">
+        <h1>🌤️ Welcome to Weather Finder</h1>
+        <p>Search any city to see its current weather and explore it on an interactive map.</p>
+
+        <!-- Search Area -->
+        <div class="search">
+            <input
+                    type="text"
+                    id="city"
+                    placeholder="Enter city name"
+                    oninput="autocompleteCity()"
+                    list="city-list"
+            />
+            <datalist id="city-list"></datalist>
+            <button onclick="getWeather()">Get Weather</button>
+            <!-- Removed Use My Location button here -->
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">Loading...</div>
+        <div class="error" id="error" style="display: none; color: red;"></div>
+
+        <div class="weather-info" id="weather-info"></div>
+        <div id="map"></div>
+
+        <!-- Recent Searches Section -->
+        <div class="recent-searches" id="recent-searches">
+            <h3>Recent Searches</h3>
+            <div id="recent-list">
+                <!-- Recent search buttons will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
